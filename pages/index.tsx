@@ -1,7 +1,8 @@
 import Link from "next/link"
+import { Button } from "antd"
+
 import style from "@/styles/Home.module.scss"
 
-import { Button } from "antd"
 
 export default function Home() {
   return (
