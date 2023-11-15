@@ -1,12 +1,18 @@
-.home-body{
+.front-body{
     height: 100vh;
     text-align: center;
     background-image: url(../public/home.jpg);
     background-size: cover;
     background-repeat: no-repeat;
 }
-.home-title{
+.front-title{
     padding-top: 300px;
-    margin-bottom: 100px;
-    color: #5ab9c1;
+    margin-bottom: 50px;
+    color: #333333;
+}
+.home{
+    height: 100vh;
+    background-image: url(../public/home.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
 }

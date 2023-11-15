@@ -1,0 +1,23 @@
+.sidebar{
+    width: 200px;
+    height: 100vh;
+    float: left;
+    background-color: rgba($color: #5ab9c1, $alpha: 1);
+    border-radius: 3px;
+    &:nth-child(1){
+        padding-top: 20px;
+        cursor: pointer;
+        text-align: center;
+    }
+}
+.sidebar-items{
+    margin-top: 40px;
+}
+.sidebar-item{
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-bottom: 1px solid #ebe2e2;
+    margin: 1px 10px;
+    cursor: pointer;
+}

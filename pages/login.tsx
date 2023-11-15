@@ -11,11 +11,11 @@ export default function Login() {
     const [form] = Form.useForm()
     const router = useRouter()
 
-    async function Login(){
+    async function handleLogin(){
         const form_data=await form.validateFields()
         console.log(form_data)
         alert("登录成功！")
-        router.push('/')
+        router.push('/home')
     }
 
     return (
@@ -39,7 +39,7 @@ export default function Login() {
                             />
                         </Form.Item>
                         <Form.Item>
-                            <Button type="primary" htmlType="submit" onClick={Login} className={style["login-form-button"]} ghost>
+                            <Button type="primary" htmlType="submit" onClick={handleLogin} className={style["login-form-button"]} ghost>
                                 登录
                             </Button>
                             <br />
