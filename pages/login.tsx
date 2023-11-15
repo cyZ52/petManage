@@ -7,7 +7,7 @@ import style from "@/styles/Login.module.scss"
 
 
 
-export default function login() {
+export default function Login() {
     const [form] = Form.useForm()
     const router = useRouter()
 
