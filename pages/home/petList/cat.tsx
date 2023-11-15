@@ -34,7 +34,7 @@ function getItem(
 }
 
 
-export default function Person() {
+export default function Cat() {
     const [collapsed, setCollapsed] = useState(false);
     const router = useRouter()
 

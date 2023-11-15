@@ -34,7 +34,7 @@ function getItem(
 }
 
 
-export default function Person() {
+export default function Missing() {
     const [collapsed, setCollapsed] = useState(false);
     const router = useRouter()
 
