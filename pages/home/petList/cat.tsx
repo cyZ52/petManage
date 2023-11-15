@@ -62,7 +62,7 @@ export default function Cat() {
 
     const items: MenuItem[] = [
         getItem('首页', '1', <HomeOutlined />, undefined, goHome),
-        getItem('个人中心', '2', <UserOutlined />,),
+        getItem('个人中心', '2', <UserOutlined />, undefined, goPerson),
         getItem('宠物种类', 'sub1', <GithubOutlined />,
             [getItem('小狗', '3', undefined, undefined, goDog),
             getItem('小猫', '4', undefined, undefined, goCat)],
@@ -95,7 +95,7 @@ export default function Cat() {
                 <Layout>
                     <Content style={{ margin: '0 16px', }}>
                         <div>
-                            home
+                            cat
                         </div>
                     </Content>
                 </Layout>
