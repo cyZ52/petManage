@@ -90,10 +90,10 @@ export default function Missing() {
             <Layout style={{ minHeight: '100vh' }}>
                 <Sider theme="dark" collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
                     <div className="demo-logo-vertical" />
-                    <Menu theme="dark" mode="inline" items={items} />
+                    <Menu theme="dark" defaultSelectedKeys={['7']} mode="inline" items={items} />
                 </Sider>
                 <Layout>
-                    <Content style={{ margin: '0 16px', }}>
+                    <Content>
                         <div>
                             missing
                         </div>
