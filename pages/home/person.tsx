@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import style from '@/styles/Layout.module.scss'
+import PersonPage from '@/components/personpage';
 
 import type { MenuProps } from 'antd';
 import { Button, Layout, Menu, Space, Tooltip, Breadcrumb, } from 'antd';
@@ -12,6 +13,7 @@ import {
     PieChartOutlined,
     SnippetsOutlined
 } from '@ant-design/icons';
+
 
 const { Content, Sider } = Layout;
 
@@ -95,7 +97,7 @@ export default function Person() {
                 <Layout>
                     <Content>
                         <div>
-                            person
+                            <PersonPage />
                         </div>
                     </Content>
                 </Layout>
