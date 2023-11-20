@@ -6,12 +6,11 @@ import PersonPage from '@/components/personpage';
 import type { MenuProps } from 'antd';
 import { Button, Layout, Menu, Space, Tooltip, Breadcrumb, } from 'antd';
 import {
-    FileOutlined,
     UserOutlined,
     HomeOutlined,
     GithubOutlined,
-    PieChartOutlined,
-    SnippetsOutlined
+    ShoppingCartOutlined,
+    CarryOutOutlined,
 } from '@ant-design/icons';
 
 
@@ -46,33 +45,33 @@ export default function Person() {
     function goPerson() {
         router.push('/home/person')
     }
-    function goDog() {
-        router.push('/home/petList/dog')
-    }
-    function goCat() {
-        router.push('/home/petList/cat')
-    }
-    function goPetList() {
+    function goList() {
         router.push('/home/petList/petlist')
     }
-    function goPetCharts() {
-        router.push('/home/petList/petcharts')
+    function goHealthy() {
+        router.push('/home/petList/pethealthy')
     }
-    function goMissing() {
-        router.push('/home/missing')
+    function goFostering() {
+        router.push('/home/petfoster/fostering')
+    }
+    function goMyPet() {
+        router.push('/home/petfoster/mypet')
+    }
+    function goProduct() {
+        router.push('/home/product')
     }
 
     const items: MenuItem[] = [
         getItem('首页', '1', <HomeOutlined />, undefined, goHome),
         getItem('个人中心', '2', <UserOutlined />, undefined, goPerson),
-        getItem('宠物种类', 'sub1', <GithubOutlined />,
-            [getItem('小狗', '3', undefined, undefined, goDog),
-            getItem('小猫', '4', undefined, undefined, goCat)],
+        getItem('寄养信息', 'sub1', <GithubOutlined />,
+            [getItem('寄养列表', '3', undefined, undefined, goList),
+            getItem('健康状态', '4', undefined, undefined, goHealthy)],
         ),
-        getItem('宠物信息', 'sub2', <PieChartOutlined />, 
-        [getItem('宠物列表', '5', undefined, undefined, goPetList), 
-        getItem('宠物图表', '6', undefined, undefined, goPetCharts)]),
-        getItem('挂失信息', '7', <SnippetsOutlined />, undefined, goMissing),
+        getItem('寄养预约', 'sub2', <CarryOutOutlined />, 
+        [getItem('寄养宠物', '5', undefined, undefined, goFostering), 
+        getItem('我的宠物', '6', undefined, undefined, goMyPet)]),
+        getItem('宠物产品', '7', <ShoppingCartOutlined />, undefined, goProduct),
     ];
 
     return (

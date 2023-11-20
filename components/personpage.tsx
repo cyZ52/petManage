@@ -62,44 +62,44 @@ export default function PersonPage() {
         },
     ];
 
-    // 账号信息 静态数据
-    const Accountitems: DescriptionsProps['items'] = [
-        {
-            key: '1',
-            label: '账号',
-            children: '11111111111',
-        },
-        {
-            key: '2',
-            label: '用户名',
-            children: 'abc',
-        },
-        {
-            key: '3',
-            label: '头像',
-            children: (
-                <Button>换成Aveter</Button>
-            ),
-        },
-        {
-            key: '4',
-            label: '账号角色',
-            children: '管理员',
-        },
-        {
-            key: '5',
-            label: '密码',
-            children: (
-                <input value={'123123123'} type='password'></input>
-            ),
-        },
-        {
-            key: '6',
-            children: (
-                <Button>修改密码</Button>
-            ),
-        },
-    ];
+    // // 账号信息 静态数据
+    // const Accountitems: DescriptionsProps['items'] = [
+    //     {
+    //         key: '1',
+    //         label: '账号',
+    //         children: '11111111111',
+    //     },
+    //     {
+    //         key: '2',
+    //         label: '用户名',
+    //         children: 'abc',
+    //     },
+    //     {
+    //         key: '3',
+    //         label: '头像',
+    //         children: (
+    //             <Button>换成Aveter</Button>
+    //         ),
+    //     },
+    //     {
+    //         key: '4',
+    //         label: '账号角色',
+    //         children: '管理员',
+    //     },
+    //     {
+    //         key: '5',
+    //         label: '密码',
+    //         children: (
+    //             <input value={'123123123'} type='password'></input>
+    //         ),
+    //     },
+    //     {
+    //         key: '6',
+    //         children: (
+    //             <Button>修改密码</Button>
+    //         ),
+    //     },
+    // ];
 
     return (
         <>
@@ -115,10 +115,10 @@ export default function PersonPage() {
                 />
                 <br />
                 <br />
-                <Descriptions
+                {/* <Descriptions
                     title="账号信息"
                     items={Accountitems}
-                />
+                /> */}
                 <Button>退出登录</Button>
             </div>
         </>
