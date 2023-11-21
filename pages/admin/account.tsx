@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import style from '@/styles/Layout.module.scss'
+import AccountCp from '@/components/adminpageCp/account';
 
 import type { MenuProps } from 'antd';
 import { Button, Layout, Menu, Space, Tooltip, Breadcrumb, } from 'antd';
@@ -99,7 +100,7 @@ export default function Home() {
                 <Layout>
                     <Content style={{ margin: '0 16px', }}>
                         <div>
-                            账号管理
+                            <AccountCp />
                         </div>
                     </Content>
                 </Layout>

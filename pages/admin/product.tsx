@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import style from '@/styles/Layout.module.scss'
+import ProductCp from '@/components/adminpageCp/product';
 
 import type { MenuProps } from 'antd';
 import { Button, Layout, Menu, Space, Tooltip, Breadcrumb, } from 'antd';
@@ -14,10 +15,10 @@ import {
     CarryOutOutlined,
     ShoppingCartOutlined
 } from '@ant-design/icons';
+type AdminItem = Required<MenuProps>['items'][number];
 
 const { Content, Sider } = Layout;
 
-type AdminItem = Required<MenuProps>['items'][number];
 
 function getItem(
     label: React.ReactNode,
@@ -99,7 +100,7 @@ export default function Home() {
                 <Layout>
                     <Content style={{ margin: '0 16px', }}>
                         <div>
-                            产品管理
+                            <ProductCp />
                         </div>
                     </Content>
                 </Layout>
