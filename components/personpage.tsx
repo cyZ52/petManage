@@ -1,9 +1,11 @@
 import style from './personpage.module.scss'
+import { useRouter } from 'next/router';
 
 import { Button, Descriptions} from 'antd';
 import type {  DescriptionsProps } from 'antd';
 
 export default function PersonPage() {
+    const router = useRouter()
 
 
     // 个人信息 静态数据
@@ -101,6 +103,10 @@ export default function PersonPage() {
     //     },
     // ];
 
+    function logout(){
+        router.push('/login')
+    }
+
     return (
         <>
             <div className={style['PersonPage']}>
@@ -119,7 +125,7 @@ export default function PersonPage() {
                     title="账号信息"
                     items={Accountitems}
                 /> */}
-                <Button>退出登录</Button>
+                <Button onClick={logout}>退出登录</Button>
             </div>
         </>
     )

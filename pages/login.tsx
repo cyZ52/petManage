@@ -11,11 +11,16 @@ export default function Login() {
     const [form] = Form.useForm()
     const router = useRouter()
 
-    async function handleLogin(){
-        const form_data=await form.validateFields()
+    async function handleLogin() {
+        const form_data = await form.validateFields()
         console.log(form_data)
-        alert("登录成功！")
-        router.push('/home')
+
+        // 判断是否为管理员
+        if (form_data.username == 'admin') {
+            router.push('/admin')
+        } else {
+            router.push('/home')
+        }
     }
 
     return (
