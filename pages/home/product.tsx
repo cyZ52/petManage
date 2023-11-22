@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import style from '@/styles/Layout.module.scss'
+import ProductFront from '@/components/homepageCp/product'
 
 import type { MenuProps } from 'antd';
 import { Button, Layout, Menu, Space, Tooltip, Breadcrumb, } from 'antd';
@@ -94,7 +95,7 @@ export default function Home() {
                 <Layout>
                     <Content style={{ margin: '0 16px', }}>
                         <div>
-                            product
+                            <ProductFront />
                         </div>
                     </Content>
                 </Layout>

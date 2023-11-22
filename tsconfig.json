@@ -17,6 +17,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/layout.jsx", "components/adminpageCp/account.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/layout.jsx", "components/adminpageCp/account.jsx", "components/adminpageCp/product.jsx", "components/homepageCp/petlist.jsx"],
   "exclude": ["node_modules"]
 }

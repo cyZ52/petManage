@@ -1,16 +1,8 @@
 import React, { useState } from 'react';
 import { Form, Input, InputNumber, Popconfirm, Table, Typography } from 'antd';
 
-// 数据接口
-interface Item {
-  key: string;
-  name: string;
-  age: number;
-  address: string;
-}
-
-// 模拟静态数据
-const originData: Item[] = [];
+// 静态模拟数据
+const originData = [];
 for (let i = 0; i < 100; i++) {
   originData.push({
     key: i.toString(),
@@ -19,18 +11,7 @@ for (let i = 0; i < 100; i++) {
     address: `London Park no. ${i}`,
   });
 }
-
-interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
-  editing: boolean;
-  dataIndex: string;
-  title: any;
-  inputType: 'number' | 'text';
-  record: Item;
-  index: number;
-  children: React.ReactNode;
-}
-
-const EditableCell: React.FC<EditableCellProps> = ({
+const EditableCell = ({
   editing,
   dataIndex,
   title,
@@ -41,13 +22,14 @@ const EditableCell: React.FC<EditableCellProps> = ({
   ...restProps
 }) => {
   const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
-
   return (
     <td {...restProps}>
       {editing ? (
         <Form.Item
           name={dataIndex}
-          style={{ margin: 0 }}
+          style={{
+            margin: 0,
+          }}
           rules={[
             {
               required: true,
@@ -64,26 +46,28 @@ const EditableCell: React.FC<EditableCellProps> = ({
   );
 };
 
+
 export default function ProductCp() {
   const [form] = Form.useForm();
   const [data, setData] = useState(originData);
   const [editingKey, setEditingKey] = useState('');
 
-  const isEditing = (record: Item) => record.key === editingKey;
-
-  const edit = (record: Partial<Item> & { key: React.Key }) => {
-    form.setFieldsValue({ name: '', age: '', address: '', ...record });
+  const isEditing = (record) => record.key === editingKey;
+  const edit = (record) => {
+    form.setFieldsValue({
+      name: '',
+      age: '',
+      address: '',
+      ...record,
+    });
     setEditingKey(record.key);
   };
-
   const cancel = () => {
     setEditingKey('');
   };
-
-  const save = async (key: React.Key) => {
+  const save = async (key) => {
     try {
-      const row = (await form.validateFields()) as Item;
-
+      const row = await form.validateFields();
       const newData = [...data];
       const index = newData.findIndex((item) => key === item.key);
       if (index > -1) {
@@ -106,31 +90,36 @@ export default function ProductCp() {
 
   const columns = [
     {
-      title: 'name',
+      title: '商品名称',
       dataIndex: 'name',
       width: '25%',
       editable: true,
     },
     {
-      title: 'age',
+      title: '商品金额',
       dataIndex: 'age',
       width: '15%',
       editable: true,
     },
     {
-      title: 'address',
+      title: '商品描述',
       dataIndex: 'address',
       width: '40%',
       editable: true,
     },
     {
-      title: 'operation',
+      title: '操作',
       dataIndex: 'operation',
-      render: (_: any, record: Item) => {
+      render: (_, record) => {
         const editable = isEditing(record);
         return editable ? (
           <span>
-            <Typography.Link onClick={() => save(record.key)} style={{ marginRight: 8 }}>
+            <Typography.Link
+              onClick={() => save(record.key)}
+              style={{
+                marginRight: 8,
+              }}
+            >
               Save
             </Typography.Link>
             <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
@@ -145,14 +134,13 @@ export default function ProductCp() {
       },
     },
   ];
-
   const mergedColumns = columns.map((col) => {
     if (!col.editable) {
       return col;
     }
     return {
       ...col,
-      onCell: (record: Item) => ({
+      onCell: (record) => ({
         record,
         inputType: col.dataIndex === 'age' ? 'number' : 'text',
         dataIndex: col.dataIndex,
@@ -178,6 +166,5 @@ export default function ProductCp() {
         }}
       />
     </Form>
-  )
-}
-
+  );
+};

@@ -89,7 +89,7 @@ export default function Home() {
             <Layout style={{ minHeight: '100vh' }}>
                 <Sider theme="dark" collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
                     <div className="demo-logo-vertical" />
-                    <Menu theme="dark" defaultSelectedKeys={['6']} mode="inline" items={items} />
+                    <Menu theme="dark" defaultSelectedKeys={['6']} defaultOpenKeys={['sub2']} mode="inline" items={items} />
                 </Sider>
                 <Layout>
                     <Content style={{ margin: '0 16px', }}>

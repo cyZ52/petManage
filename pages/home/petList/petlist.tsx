@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import style from '@/styles/Layout.module.scss'
+import PetListFront from '@/components/homepageCp/petlist';
 
 import type { MenuProps } from 'antd';
 import { Button, Layout, Menu, Space, Tooltip, Breadcrumb, } from 'antd';
@@ -89,12 +90,12 @@ export default function Home() {
             <Layout style={{ minHeight: '100vh' }}>
                 <Sider theme="dark" collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
                     <div className="demo-logo-vertical" />
-                    <Menu theme="dark" defaultSelectedKeys={['3']} mode="inline" items={items} />
+                    <Menu theme="dark" defaultSelectedKeys={['3']} defaultOpenKeys={['sub1']} mode="inline" items={items} />
                 </Sider>
                 <Layout>
                     <Content style={{ margin: '0 16px', }}>
                         <div>
-                            petlist
+                            <PetListFront />
                         </div>
                     </Content>
                 </Layout>
