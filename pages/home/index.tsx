@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from '@/styles/Layout.module.scss'
 import HomePage from '@/components/homepage';
 
@@ -39,6 +39,7 @@ export default function Home() {
     const [collapsed, setCollapsed] = useState(false);
     const router = useRouter()
 
+
     function goHome() {
         router.push('/home')
     }
@@ -68,9 +69,9 @@ export default function Home() {
             [getItem('寄养列表', '3', undefined, undefined, goList),
             getItem('健康状态', '4', undefined, undefined, goHealthy)],
         ),
-        getItem('寄养预约', 'sub2', <CarryOutOutlined />, 
-        [getItem('寄养宠物', '5', undefined, undefined, goFostering), 
-        getItem('我的宠物', '6', undefined, undefined, goMyPet)]),
+        getItem('寄养预约', 'sub2', <CarryOutOutlined />,
+            [getItem('寄养宠物', '5', undefined, undefined, goFostering),
+            getItem('我的宠物', '6', undefined, undefined, goMyPet)]),
         getItem('宠物产品', '7', <ShoppingCartOutlined />, undefined, goProduct),
     ];
 

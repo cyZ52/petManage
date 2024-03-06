@@ -1,8 +1,8 @@
 import style from './personpage.module.scss'
 import { useRouter } from 'next/router';
 
-import { Button, Descriptions} from 'antd';
-import type {  DescriptionsProps } from 'antd';
+import { Button, Descriptions } from 'antd';
+import type { DescriptionsProps } from 'antd';
 
 export default function PersonPage() {
     const router = useRouter()
@@ -103,8 +103,9 @@ export default function PersonPage() {
     //     },
     // ];
 
-    function logout(){
-        router.push('/login')
+    function logout() {
+        // 
+        router.push('/login');
     }
 
     return (

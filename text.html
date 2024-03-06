@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="checkbox" id="toggle" class="toggle-input">
+    <label for="toggle" class="toggle-label"></label>
+</body>
+
+<style>
+.toggle-container {
+  position: relative;
+  display: inline-block;
+}
+
+.toggle-input {
+  display: none;
+}
+
+.toggle-label {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 20px;
+  background-color: #ccc;
+  border-radius: 20px;
+  transition: background-color 0.3s;
+}
+
+.toggle-input:checked + .toggle-label {
+  background-color: #4caf50; /* 切换到开启时的颜色 */
+}
+
+.toggle-label::before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: white;
+  top: 1px;
+  left: 1px;
+  transition: transform 0.3s;
+}
+
+.toggle-input:checked + .toggle-label::before {
+  transform: translateX(20px);
+}
+</style>
+
+<script>
+
+</script>
+
+</html>

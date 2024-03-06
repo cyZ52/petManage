@@ -3,6 +3,8 @@ import { EyeInvisibleOutlined, EyeTwoTone, LockOutlined, UserOutlined } from '@a
 import Link from "next/link";
 import { useRouter } from "next/router";
 
+import axios from "axios";
+
 import style from "@/styles/Login.module.scss"
 
 
@@ -11,12 +13,46 @@ export default function Register() {
     const [form] = Form.useForm()
     const router = useRouter()
 
-    async function handleRegister(){
-        const form_data=await form.validateFields()
-        console.log(form_data)
-        alert("注册成功！")
-        router.push('/login')
+
+    async function handleRegister() {
+    try {
+        // 从表单中获取数据
+        const form_data = await form.validateFields();
+        // 打印表单内容
+        console.log('打印表单内容:',form_data);
+
+        // 构建 POST 请求的数据
+        const postData = {
+            username: form_data.username,
+            password: form_data.password 
+        };
+
+        // 发送 POST 请求
+        const response = await axios.post('http://localhost:3001/auth/register', postData);
+
+        // 打印服务器返回的json数据
+        console.log('服务器返回的json数据',response);
+
+        const data = response.data;
+
+        // 根据服务器的响应处理结果
+        if (response.status === 200) {
+            if(data.code === '0003'){
+                // 用户名已存在
+            } else {
+                // 注册成功
+            }
+
+            console.log(data.msg);
+        } else {
+            // 处理其他响应状态码
+            console.error('发生错误,错误状态码:', response.status);
+        }
+    } catch (error) {
+        // 处理请求错误
+        console.error('注册失败:', error);
     }
+}
 
     return (
         <>
