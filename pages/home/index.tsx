@@ -13,6 +13,7 @@ import {
     ShoppingCartOutlined,
     CarryOutOutlined
 } from '@ant-design/icons';
+import axios from 'axios';
 
 const { Content, Sider } = Layout;
 
@@ -37,7 +38,22 @@ function getItem(
 
 export default function Home() {
     const [collapsed, setCollapsed] = useState(false);
-    const router = useRouter()
+    const router = useRouter();
+
+    useEffect(() => {
+        axios.get('http://localhost:3001/auth/checkLogin',{
+            withCredentials: true   // 设置在请求中携带session信息
+        })
+            .then(response => {
+                if(response.data.msg != 'isLogin') {
+                    alert('请先登录!')
+                    router.push('/login')
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error); // 处理请求错误
+            });
+    },[])
 
 
     function goHome() {
