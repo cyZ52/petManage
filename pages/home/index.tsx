@@ -46,8 +46,8 @@ export default function Home() {
         })
             .then(response => {
                 if(response.data.msg != 'isLogin') {
-                    alert('请先登录!')
-                    router.push('/login')
+                    // alert('请先登录!')
+                    // router.push('/login')
                 }
             })
             .catch(error => {

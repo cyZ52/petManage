@@ -1,4 +1,4 @@
-.login-body{
+.login-body {
     height: 100vh;
     text-align: center;
     background-image: url(../public/home.jpg);
@@ -6,7 +6,8 @@
     background-repeat: no-repeat;
     position: relative;
 }
-.login-box{
+
+.login-box {
     height: 500px;
     width: 300px;
     border-radius: 10px;
@@ -14,28 +15,41 @@
     box-shadow: 1px 1px #333333;
 
     position: absolute;
-    top:50%;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 }
-.login-title{
+
+.login-title {
     margin-top: 30px;
     margin-bottom: 100px;
     color: #333333;
 }
-.login-title-1{
+
+.login-title-1 {
     color: #333333;
     margin-bottom: 10px;
 }
-.login-form{
+
+.login-form {
     margin: 0 auto;
     max-width: 200px;
 }
-.login-form-button{
+
+.login-form-button {
     margin-top: 30px;
     margin-bottom: 10px;
     min-width: 100px;
 }
-.goRegister{
+
+.goRegister {
     color: #ffffff;
+}
+
+.alert {
+    position: absolute;
+    width: 200px;
+    height: 40px;
+    left: 50%;
+    transform: translate(-50%,50%);
 }
