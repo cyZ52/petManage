@@ -2,14 +2,14 @@ import style from './personpage.module.scss'
 import { useRouter } from 'next/router';
 
 import { Button, Descriptions } from 'antd';
-import type { DescriptionsProps } from 'antd';
+
 
 export default function PersonPage() {
     const router = useRouter()
 
 
     // 个人信息 静态数据
-    const PersonItems: DescriptionsProps['items'] = [
+    const PersonItems = [
         {
             key: '1',
             label: '用户名',

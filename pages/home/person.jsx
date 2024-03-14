@@ -1,10 +1,6 @@
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import style from '@/styles/Layout.module.scss'
-import PersonPage from '@/components/personpage';
-
-import type { MenuProps } from 'antd';
-import { Button, Layout, Menu, Space, Tooltip, Breadcrumb, } from 'antd';
+import { useRouter } from 'next/router';
+import { Button, Layout, Menu, Tooltip } from 'antd';
 import {
     UserOutlined,
     HomeOutlined,
@@ -12,56 +8,54 @@ import {
     ShoppingCartOutlined,
     CarryOutOutlined,
 } from '@ant-design/icons';
-
+import style from '@/styles/Layout.module.scss';
+import PersonPage from '@/components/personpage';
 
 const { Content, Sider } = Layout;
 
-type MenuItem = Required<MenuProps>['items'][number];
-
 function getItem(
-    label: React.ReactNode,
-    key: React.Key,
-    icon?: React.ReactNode,
-    children?: MenuItem[],
-    onClick?: () => void
-): MenuItem {
+    label,
+    key,
+    icon,
+    children,
+    onClick
+) {
     return {
         key,
         icon,
         children,
         label,
         onClick,
-    } as MenuItem;
+    };
 }
-
 
 export default function Person() {
     const [collapsed, setCollapsed] = useState(false);
-    const router = useRouter()
+    const router = useRouter();
 
     function goHome() {
-        router.push('/home')
+        router.push('/home');
     }
     function goPerson() {
-        router.push('/home/person')
+        router.push('/home/person');
     }
     function goList() {
-        router.push('/home/petList/petlist')
+        router.push('/home/petList/petlist');
     }
     function goHealthy() {
-        router.push('/home/petList/pethealthy')
+        router.push('/home/petList/pethealthy');
     }
     function goFostering() {
-        router.push('/home/petfoster/fostering')
+        router.push('/home/petfoster/fostering');
     }
     function goMyPet() {
-        router.push('/home/petfoster/mypet')
+        router.push('/home/petfoster/mypet');
     }
     function goProduct() {
-        router.push('/home/product')
+        router.push('/home/product');
     }
 
-    const items: MenuItem[] = [
+    const items = [
         getItem('首页', '1', <HomeOutlined />, undefined, goHome),
         getItem('个人中心', '2', <UserOutlined />, undefined, goPerson),
         getItem('寄养信息', 'sub1', <GithubOutlined />,
@@ -76,7 +70,6 @@ export default function Person() {
 
     return (
         <>
-
             <div className={style['layout-header']}>
                 <Tooltip title="返回主页">
                     <Button shape="circle" icon={<HomeOutlined />} onClick={goHome} />
@@ -86,8 +79,6 @@ export default function Person() {
                     <Button shape="circle" icon={<UserOutlined />} onClick={goPerson} />
                 </Tooltip>
             </div>
-
-
             <Layout style={{ minHeight: '100vh' }}>
                 <Sider theme="dark" collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
                     <div className="demo-logo-vertical" />
@@ -101,8 +92,6 @@ export default function Person() {
                     </Content>
                 </Layout>
             </Layout>
-
         </>
-
     );
 };

@@ -1,11 +1,13 @@
 import React from 'react';
 import { Button, Table, Tooltip, Popconfirm } from 'antd';
-import { useAccountStore } from '@/store/account';
 
 
 export default function AccountCp() {
-
-  const accountStore = useAccountStore()
+  
+  function handleDelete(key) {
+    alert(`删除成功，${key}号账号已删除`)
+    console.log(key)
+  }
 
   // 表格表头
   const columns = [
@@ -13,7 +15,6 @@ export default function AccountCp() {
       title: '用户名',
       dataIndex: 'name',   // 对应属性
       key: 'name',
-      render: (text) => <a>{text}</a>,
       width: 150,
     },
     {
@@ -65,7 +66,7 @@ export default function AccountCp() {
       dataIndex: 'operation',
       render: (_, record) =>
         data.length >= 1 ? (
-          <Popconfirm title={`确定删除${record.key}号账号?`} onConfirm={() => { accountStore.handleDelete(record.key) }}>
+          <Popconfirm title={`确定删除${record.key}号账号?`} onConfirm={() => { handleDelete(record.key) }}>
             <Button>删除账号</Button>
           </Popconfirm>
         ) : null,

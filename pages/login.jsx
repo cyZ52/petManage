@@ -7,11 +7,17 @@ import axios from 'axios';
 
 import style from "@/styles/Login.module.scss"
 
+import { useDispatch, useSelector } from "react-redux";
+import { setUsername } from "@/redux/slice/user";
+
+
 
 
 export default function Login() {
     const [form] = Form.useForm();
     const router = useRouter();
+    const dispatch = useDispatch();
+    const username = useSelector(state => state.user.username);
 
 
     async function handleLogin() {
@@ -35,13 +41,17 @@ export default function Login() {
 
             const data = response.data;
 
+
             // 根据服务器的响应处理结果
             if (response.status === 200) {
+                // 设置当前用户
+                dispatch(setUsername(data.data));
+
                 if (data.code === '0002') {
                     // 完善UI
                 } else {
                     // 如果是管理员，跳转到管理员页面
-                    if (data.code === '0000') {
+                    if (data.data.username === 'admin') {
                         router.push('/admin');
                     } else {
                         // 否则跳转到普通用户页面
