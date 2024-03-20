@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import style from '@/styles/Layout.module.scss'
+import AccountCp from '@/components/adminpageCp/account';
 
-import type { MenuProps } from 'antd';
-import { Button, Layout, Menu, Space, Tooltip, Breadcrumb, } from 'antd';
+import { Button, Layout, Menu, Tooltip } from 'antd';
 import {
     NotificationOutlined,
     LogoutOutlined,
@@ -17,22 +17,14 @@ import {
 
 const { Content, Sider } = Layout;
 
-type AdminItem = Required<MenuProps>['items'][number];
-
-function getItem(
-    label: React.ReactNode,
-    key: React.Key,
-    icon?: React.ReactNode,
-    children?: AdminItem[],
-    onClick?: () => void
-): AdminItem {
+function getItem(label, key, icon, children, onClick) {
     return {
         key,
         icon,
         children,
         label,
         onClick,
-    } as AdminItem;
+    };
 }
 
 
@@ -65,7 +57,7 @@ export default function Home() {
         router.push('/login')
     }
 
-    const items: AdminItem[] = [
+    const items = [
         getItem('统计图表', '1', <PieChartOutlined />, undefined, goHome),
         getItem('系统通知', '2', <NotificationOutlined />, undefined, goNotifi),
         getItem('账号管理', '3', <UserOutlined />, undefined, goAccount),
@@ -94,12 +86,12 @@ export default function Home() {
             <Layout style={{ minHeight: '100vh' }}>
                 <Sider theme="dark" collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
                     <div className="demo-logo-vertical" />
-                    <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+                    <Menu theme="dark" defaultSelectedKeys={['3']} mode="inline" items={items} />
                 </Sider>
                 <Layout>
                     <Content style={{ margin: '0 16px', }}>
                         <div>
-                            统计图表
+                            <AccountCp />
                         </div>
                     </Content>
                 </Layout>

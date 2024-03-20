@@ -17,8 +17,8 @@ export default function HomePage() {
     var day = time.getDay();
     var h = time.getHours();
     var m = time.getMinutes();
-    var s = time.getSeconds();
-    dateTime = `现在是${year}-${mounth}-${day} ${h}:${m}:${s}`;
+    // var s = time.getSeconds();
+    dateTime = `现在是${year}-${mounth}-${day} ${h}:${m}`;
 
 
 
@@ -26,8 +26,9 @@ export default function HomePage() {
         <>
             <div className={style['HomePage']} >
                 <h2 className={style['HomePage-timer']}>{dateTime} 欢迎用户{username}</h2>
-                <h3>宠物轮播:</h3>
+                {/* <h3>宠物轮播:</h3> */}
                 <CarouselCp />
+                <br />
                 <h3>系统通知:</h3>
                 <div className={style['HomePage-notifi']}>
                     <Notification />

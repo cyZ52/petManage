@@ -2,12 +2,13 @@ import { Carousel } from 'antd';
 
 const contentStyle = {
     height: '500px',
-    width: '80%',
+    width: '600px',
     color: '#fff',
     lineHeight: '500px',
     textAlign: 'center',
     background: '#364d79',
-    margin: '10px auto'
+    margin: '10px auto',
+    backgroundSize: 'cover'
 };
 
 export default function CarouselCp() {
