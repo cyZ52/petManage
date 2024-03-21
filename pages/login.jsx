@@ -45,7 +45,12 @@ export default function Login() {
             // 根据服务器的响应处理结果
             if (response.status === 200) {
                 // 设置当前用户
-                dispatch(setUsername(data.data));
+                 // 将数据存储到浏览器
+                 sessionStorage.setItem('userInfo', JSON.stringify(data.data));
+                 const sessionUserInfo = sessionStorage.getItem('userInfo');
+                 const userInfo = JSON.parse(sessionUserInfo);
+ 
+                 dispatch(setUsername(userInfo));
 
                 if (data.code === '0002') {
                     // 完善UI

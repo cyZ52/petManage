@@ -14,6 +14,7 @@ import {
 
 import style from '@/styles/Layout.module.scss';
 import HomePage from '@/components/homepage';
+import { setUsername } from '@/redux/slice/user';
 
 const { Content, Sider } = Layout;
 
@@ -39,14 +40,17 @@ export default function Home() {
     const dispatch = useDispatch();
     const username = useSelector(state => state.user.username);
 
-    console.log(username);
 
     useEffect(() => {
-        axios.get('http://localhost:3001/auth/checkLogin',{
+        axios.get('http://localhost:3001/auth/checkLogin', {
             withCredentials: true,   // 设置在请求中携带session信息
         })
             .then(response => {
-                if(response.data.msg != 'isLogin') {
+                const sessionUserInfo = sessionStorage.getItem('userInfo');
+                const userInfo = JSON.parse(sessionUserInfo);
+                dispatch(setUsername(userInfo));
+
+                if (response.data.msg != 'isLogin') {
                     alert('请先登录!');
                     router.push('/login');
                 }
@@ -54,7 +58,19 @@ export default function Home() {
             .catch(error => {
                 console.error('Error fetching data:', error); // 处理请求错误
             });
-    },[]);
+    }, []);
+
+    useEffect(() => {
+        // 获取用户信息并保存到sessionStorege
+        axios.post('http://localhost:3001/auth/getUserInfo', {
+            username: username
+        }).then(response => {
+            // console.log(response.data.data);
+            sessionStorage.setItem('personInfo', JSON.stringify(response.data.data));
+        }).catch((err) => {
+            console.log('请求失败', err);
+        })
+    })
 
     function goHome() {
         router.push('/home');

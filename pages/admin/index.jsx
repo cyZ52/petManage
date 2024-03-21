@@ -29,31 +29,32 @@ function getItem(label, key, icon, children, onClick) {
 
 export default function Home() {
     const [collapsed, setCollapsed] = useState(false);
-    const router = useRouter()
+    const router = useRouter();
 
     function goHome() {
-        router.push('/admin')
+        router.push('/admin');
     }
     function goNotifi() {
-        router.push('/admin/notifications')
+        router.push('/admin/notifications');
     }
     function goList() {
-        router.push('/admin/petfoster/petlist')
+        router.push('/admin/petfoster/petlist');
     }
     function goAccount(){
-        router.push('/admin/account')
+        router.push('/admin/account');
     }
     function goHealthy() {
-        router.push('/admin/petfoster/pethealthy')
+        router.push('/admin/petfoster/pethealthy');
     }
     function goFostering() {
-        router.push('/admin/petfoster/fostering')
+        router.push('/admin/petfoster/fostering');
     }
     function goProduct() {
-        router.push('/admin/product')
+        router.push('/admin/product');
     }
     function logout(){
-        router.push('/login')
+        sessionStorage.clear();
+        router.push('/login');
     }
 
     const items = [
