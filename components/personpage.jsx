@@ -13,8 +13,11 @@ export default function PersonPage() {
     const [form] = Form.useForm();
     const router = useRouter();
     const username = useSelector(state => state.user.username);
-    const personInfo = sessionStorage.getItem('personInfo');
-    const { avater, age, location, sex, like, personSlogan } = JSON.parse(personInfo);
+
+    // const personInfo = sessionStorage.getItem('personInfo');
+    // const { avater, age, location, sex, like, personSlogan } = JSON.parse(personInfo);
+    const personInfo = typeof window !== 'undefined' ? sessionStorage.getItem('personInfo') : null;
+    const { avater, age, location, sex, like, personSlogan } = personInfo ? JSON.parse(personInfo) : {};
 
     const [isModalShow, setIsModalShow] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
