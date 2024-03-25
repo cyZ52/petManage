@@ -1,8 +1,10 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import style from '@/styles/Layout.module.scss'
+import axios from 'axios';
 
-import { Button, Layout, Menu, Tooltip } from 'antd';
+import style from '@/styles/Layout.module.scss';
+
+import { Button, Layout, Menu, Tooltip, message } from 'antd';
 import {
     NotificationOutlined,
     LogoutOutlined,
@@ -53,7 +55,9 @@ export default function Home() {
         router.push('/admin/product');
     }
     function logout(){
+        message.success('退出登录成功!');
         sessionStorage.clear();
+        axios.get('http://localhost:3001/auth/logout');
         router.push('/login');
     }
 

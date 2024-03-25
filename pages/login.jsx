@@ -1,4 +1,4 @@
-import { Button, Form, Input } from "antd"
+import { Button, Form, Input, message } from "antd"
 import { EyeInvisibleOutlined, EyeTwoTone, LockOutlined, UserOutlined } from '@ant-design/icons';
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -40,38 +40,33 @@ export default function Login() {
             console.log('服务器返回的json数据', response);
 
             const data = response.data;
+            console.log(data);
 
 
             // 根据服务器的响应处理结果
             if (response.status === 200) {
                 // 设置当前用户
-                 // 将数据存储到浏览器
-                 sessionStorage.setItem('userInfo', JSON.stringify(data.data));
-                 const sessionUserInfo = sessionStorage.getItem('userInfo');
-                 const userInfo = JSON.parse(sessionUserInfo);
- 
-                 dispatch(setUsername(userInfo));
+                // 将数据存储到浏览器
+                sessionStorage.setItem('userInfo', JSON.stringify(data.data));
+                const sessionUserInfo = sessionStorage.getItem('userInfo');
+                const userInfo = JSON.parse(sessionUserInfo);
 
-                if (data.code === '0002') {
-                    // 完善UI
+                dispatch(setUsername(userInfo));
+
+                // 如果是管理员，跳转到管理员页面
+                if (data.data.username === 'admin') {
+                    router.push('/admin');
                 } else {
-                    // 如果是管理员，跳转到管理员页面
-                    if (data.data.username === 'admin') {
-                        router.push('/admin');
-                    } else {
-                        // 否则跳转到普通用户页面
-                        router.push('/home');
-                    }
+                    // 否则跳转到普通用户页面
+                    router.push('/home');
                 }
-
-                console.log(data.msg);
-            } else {
-                // 处理其他响应状态码
-                console.error('发生错误,错误状态码:', response.status);
             }
+
+            console.log(data.msg);
         } catch (error) {
             // 处理请求错误
-            console.error('登录失败:', error);
+            message.error('用户名或密码错误!');
+            // console.error('登录失败:', error);
         }
     }
 

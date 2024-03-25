@@ -7,7 +7,6 @@ import store from '@/redux/store'
 
 
 
-
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>

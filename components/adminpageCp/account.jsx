@@ -1,20 +1,49 @@
-import React from 'react';
-import { Button, Table, Tooltip, Popconfirm } from 'antd';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+
+import { Button, Table, Tooltip, Popconfirm, message } from 'antd';
 
 
 export default function AccountCp() {
-  
-  function handleDelete(key) {
-    alert(`删除成功，${key}号账号已删除`)
-    console.log(key)
+  const [accountData, setAccountData] = useState([]);
+
+  async function getAccounts() {
+    try {
+      axios.get('http://localhost:3001/account/getAccounts').then(response => {
+        setAccountData(response.data.data);
+      }
+      )
+    }
+    catch (err) {
+      console.log('获取账户信息发生错误',err);
+    }
+  }
+
+  useEffect(() => {
+    getAccounts();
+  }, []);
+
+  function handleReset(username) {
+    try {
+      axios.post('http://localhost:3001/account/resetPassword',{
+        username
+      }).then(() => {
+        message.success('修改成功!');
+      })
+    }
+    catch (err) {
+      message.warning('修改失败');
+      console.log('修改失败',err);
+    }
   }
 
   // 表格表头
   const columns = [
     {
       title: '用户名',
-      dataIndex: 'name',   // 对应属性
-      key: 'name',
+      dataIndex: 'username',   // 对应属性
+      key: 'username',
       width: 150,
     },
     {
@@ -38,20 +67,20 @@ export default function AccountCp() {
     },
     {
       title: '地址',
-      dataIndex: 'address',
-      key: 'address',
+      dataIndex: 'location',
+      key: 'location',
       width: 120,
     },
     {
       title: '爱好',
-      dataIndex: 'likes',
-      key: 'likes',
+      dataIndex: 'like',
+      key: 'like',
       width: 100,
     },
     {
       title: '个人标语',
-      dataIndex: 'motto',
-      key: 'motto',
+      dataIndex: 'personSlogan',
+      key: 'personSlogan',
       ellipsis: {
         showTitle: false,
       },
@@ -65,39 +94,15 @@ export default function AccountCp() {
       title: 'operation',
       dataIndex: 'operation',
       render: (_, record) =>
-        data.length >= 1 ? (
-          <Popconfirm title={`确定删除${record.key}号账号?`} onConfirm={() => { handleDelete(record.key) }}>
-            <Button>删除账号</Button>
-          </Popconfirm>
-        ) : null,
+        <Popconfirm title={`确定重置'${record.username}'账号的密码?`} onConfirm={() => { handleReset(record.username) }}>
+          <Button>重置密码</Button>
+        </Popconfirm>
     },
   ];
 
-  // 模拟静态数据
-  const data = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      sex: '男',
-      address: '成都',
-      avater: 'avaterUrl',
-      likes: '小猫',
-      motto: 'abcdefg'
-    },
-    {
-      key: '2',
-      name: 'John Brown',
-      age: 32,
-      sex: '男',
-      address: '成都',
-      avater: 'avaterUrl',
-      likes: '小猫',
-      motto: 'abcdefg'
-    },
-  ]
+
 
   return (
-    <Table columns={columns} dataSource={data} />
+    <Table columns={columns} dataSource={accountData} />
   )
 }

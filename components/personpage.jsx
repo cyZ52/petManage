@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import style from './personpage.module.scss';
 
-import { Button, Descriptions, Form, Input, InputNumber, Modal, Radio, message } from 'antd';
+import { Button, Descriptions, Form, Input, InputNumber, Modal, Radio, Space, message } from 'antd';
 
 
 
@@ -19,35 +19,73 @@ export default function PersonPage() {
     const [isModalShow, setIsModalShow] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
 
+    const [isPasswordModalShow, setIsPasswordModalShow] = useState(false);
+    const [PasswordconfirmLoading, setPasswordConfirmLoading] = useState(false);
+
     const showModal = () => {
         setIsModalShow(true);
     };
+    
+    const showPasswordModal = () => {
+        setIsPasswordModalShow(true);
+    };
+
+    const handleCancel = () => {
+        setIsModalShow(false);
+    };
+    
+    const handlePasswordCancel = () => {
+        setIsPasswordModalShow(false);
+    };
+
     async function handleOk() {
         const form_data = await form.validateFields();
 
-        console.log('修改后的用户信息为:',form_data);
+        console.log('修改后的用户信息为:', form_data);
 
         const updateData = {
             username: username,
             ...form_data
         }
 
-        axios.post('http://localhost:3001/auth/changeUserInfo', updateData).then(() => {
+        axios.post('http://localhost:3001/account/changeUserInfo', updateData).then(() => {
             message.success('修改成功,稍后跳转至主页!');
             setConfirmLoading(true);
             setTimeout(() => {
                 setConfirmLoading(false);
                 setIsModalShow(false);
                 router.push('/home');
-            },1000)
+            }, 1000)
         })
     };
-    const handleCancel = () => {
-        setIsModalShow(false);
-    };
 
+    async function changePassword() {
+        const form_data = await form.validateFields();
 
-    // 个人信息 静态数据
+        const updateData = {
+            username: username,
+            ...form_data
+        }
+
+        axios.post('http://localhost:3001/account/changePassword',updateData).then(() => {
+            message.success('修改密码成功,请重新登录!');
+            setPasswordConfirmLoading(true);
+            setTimeout(() => {
+                setPasswordConfirmLoading(false);
+                setIsPasswordModalShow(false);
+                router.push('/login');
+            }, 1000)
+        })
+    }
+
+    function logout() {
+        message.success('退出登录成功!');
+        sessionStorage.clear();
+        axios.get('http://localhost:3001/auth/logout');
+        router.push('/login');
+    }
+
+    // 个人信息表头
     const PersonItems = [
         {
             key: '1',
@@ -88,13 +126,6 @@ export default function PersonPage() {
         },
     ];
 
-
-    function logout() {
-        // 完善退出登陆
-        sessionStorage.clear();
-        router.push('/login');
-    }
-
     return (
         <>
             <div className={style['PersonPage']}>
@@ -106,7 +137,11 @@ export default function PersonPage() {
                     title="个人信息"
                     extra={
                         <>
+                        <Space>
+                            <Button type="primary" onClick={showPasswordModal}>修改密码</Button>
                             <Button type="primary" onClick={showModal}>编辑信息</Button>
+                        </Space>
+                            
                             <Modal title="Basic Modal" open={isModalShow} okText='确认修改' onOk={handleOk} cancelText='取消' onCancel={handleCancel} confirmLoading={confirmLoading}>
                                 <Form
                                     name="nitify"
@@ -142,7 +177,7 @@ export default function PersonPage() {
                                         label="住址"
                                         name="location"
                                     >
-                                        <Input placeholder='请输入你所在的城市' defaultValue={location}/>
+                                        <Input placeholder='请输入你所在的城市' defaultValue={location} />
                                     </Form.Item>
 
                                     <Form.Item
@@ -171,7 +206,32 @@ export default function PersonPage() {
                                         label="个人标语"
                                         name="personSlogan"
                                     >
-                                        <Input placeholder='请输入个人标语' defaultValue={personSlogan}/>
+                                        <Input placeholder='请输入个人标语' defaultValue={personSlogan} />
+                                    </Form.Item>
+                                </Form>
+                            </Modal>
+                            <Modal title="Basic Modal" open={isPasswordModalShow} okText='确认修改' onOk={changePassword} cancelText='取消' onCancel={handlePasswordCancel} confirmLoading={PasswordconfirmLoading}>
+                                <Form
+                                    name="nitify"
+                                    form={form}
+                                    labelCol={{
+                                        span: 8,
+                                    }}
+                                    wrapperCol={{
+                                        span: 16,
+                                    }}
+                                    style={{
+                                        maxWidth: 400,
+                                    }}
+                                    initialValues={{
+                                        remember: true,
+                                    }}
+                                >
+                                    <Form.Item
+                                        label="新的密码"
+                                        name="password"
+                                    >
+                                        <Input placeholder='请输入新的密码' />
                                     </Form.Item>
                                 </Form>
                             </Modal>
@@ -179,6 +239,9 @@ export default function PersonPage() {
                     }
                     items={PersonItems}
                 />
+                <br />
+                <br />
+
                 <br />
                 <br />
                 <Button onClick={logout}>退出登录</Button>

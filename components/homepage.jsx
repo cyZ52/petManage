@@ -13,8 +13,8 @@ export default function HomePage() {
     // 获取时间
     var dateTime = '';
     var year = time.getFullYear();
-    var mounth = time.getMonth();
-    var day = time.getDay();
+    var mounth = time.getMonth() + 1;
+    var day = time.getDate();
     var h = time.getHours();
     var m = time.getMinutes();
     // var s = time.getSeconds();

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { Button, Layout, Menu, Tooltip } from 'antd';
+import { Button, Layout, Menu, Tooltip, message } from 'antd';
 import {
     FileOutlined,
     UserOutlined,
@@ -41,35 +41,52 @@ export default function Home() {
     const username = useSelector(state => state.user.username);
 
 
-    useEffect(() => {
-        axios.get('http://localhost:3001/auth/checkLogin', {
-            withCredentials: true,   // 设置在请求中携带session信息
-        })
-            .then(response => {
-                const sessionUserInfo = sessionStorage.getItem('userInfo');
-                const userInfo = JSON.parse(sessionUserInfo);
-                dispatch(setUsername(userInfo));
+    // useEffect(() => {
+    //     // 检查登录状态
+    //     const sessionUserInfo = sessionStorage.getItem('userInfo');
+    //     const userInfo = JSON.parse(sessionUserInfo);
+    //     axios.post('http://localhost:3001/auth/checkLogin', {
+    //         userInfo
+    //     })
+    //         .then(response => {
 
-                if (response.data.msg != 'isLogin') {
-                    alert('请先登录!');
-                    router.push('/login');
-                }
+    //             dispatch(setUsername(userInfo));
+
+    //             if (response.data.msg != 'isLogin') {
+    //                 alert('请先登录!');
+    //                 router.push('/login');
+    //             }
+    //         })
+    //         .catch(error => {
+    //             console.error('Error fetching data:', error); // 处理请求错误
+    //         });
+    // }, []);
+
+    useEffect(() => {
+        try {
+            const sessionUserInfo = sessionStorage.getItem('userInfo');
+            const userInfo = JSON.parse(sessionUserInfo);
+
+
+            // 获取用户信息并保存到sessionStorege
+            axios.post('http://localhost:3001/auth/getUserInfo', {
+                username: userInfo.username
+            }).then(response => {
+                // console.log(response.data.data);
+                sessionStorage.setItem('personInfo', JSON.stringify(response.data.data));
+                const seesionPersonInfo = sessionStorage.getItem('personInfo');
+                const personInfo = JSON.parse(seesionPersonInfo);
+                dispatch(setUsername(personInfo));
+            }).catch((err) => {
+                console.log('请求失败', err);
             })
-            .catch(error => {
-                console.error('Error fetching data:', error); // 处理请求错误
-            });
-    }, []);
-
-    useEffect(() => {
-        // 获取用户信息并保存到sessionStorege
-        axios.post('http://localhost:3001/auth/getUserInfo', {
-            username: username
-        }).then(response => {
-            // console.log(response.data.data);
-            sessionStorage.setItem('personInfo', JSON.stringify(response.data.data));
-        }).catch((err) => {
-            console.log('请求失败', err);
-        })
+        }
+        catch {
+            setTimeout(() => {
+                message.warning('请先登录!');
+                router.push('/login')
+            }, 200);
+        }
     })
 
     function goHome() {
