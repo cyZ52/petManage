@@ -21,28 +21,8 @@ const columns = [
         key: 'address',
     },
     {
-        title: '健康状态',
-        key: 'tags',
-        dataIndex: 'tags',
-        render: (tags) => (
-            <span>
-                {tags.map((tag) => {
-                    let color = tag.length > 5 ? 'geekblue' : 'green';
-                    if (tag === 'loser') {
-                        color = 'volcano';
-                    }
-                    return (
-                        <Tag color={color} key={tag}>
-                            {tag.toUpperCase()}
-                        </Tag>
-                    );
-                })}
-            </span>
-        ),
-    },
-    {
         title: '寄养状态',
-        key: 'tags 1',
+        key: 'tags',
         dataIndex: 'tags',
         render: (tags) => (
             <span>

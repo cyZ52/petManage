@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import style from '@/styles/Layout.module.scss';
-import MyPet from '@/components/homepageCp/mypet';
+import Fostering from '@/components/homepageCp/fostering'
 
 import { Button, Layout, Menu, Tooltip } from 'antd';
 import {
@@ -93,7 +93,7 @@ export default function Home() {
                 <Layout>
                     <Content style={{ margin: '0 16px' }}>
                         <div>
-                            <MyPet />
+                            <Fostering />
                         </div>
                     </Content>
                 </Layout>
