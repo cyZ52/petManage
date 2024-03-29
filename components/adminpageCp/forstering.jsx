@@ -1,131 +1,71 @@
-import React, { useState } from 'react';
-import { Button, Radio, Space, Table, Tag } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+
+import axios from 'axios';
+
+import { Button, Popconfirm, Radio, Space, Table, Tag, message } from 'antd';
 
 
-const columns = [
-    {
-        title: '用户名',
-        dataIndex: 'name',
-        key: 'name',
-        render: (text) => <a>{text}</a>,
-    },
-    {
-        title: '时间',
-        dataIndex: 'address',
-        key: 'address',
-    },
-    {
-        title: '状态',
-        key: 'tags',
-        dataIndex: 'tags',
-        render: (tags) => (
-            <span>
-                {tags.map((tag) => {
-                    let color = tag.length > 5 ? 'geekblue' : 'green';
-                    if (tag === 'loser') {
-                        color = 'volcano';
-                    }
-                    return (
-                        <Tag color={color} key={tag}>
-                            {tag.toUpperCase()}
-                        </Tag>
-                    );
-                })}
-            </span>
-        ),
-    },
-    {
-        title: '更改状态',
-        key: 'action',
-        render: (_, record) => (
-            <Space size="middle">
-                <Button>修改</Button>
-                <Button>撤销</Button>
-            </Space>
-        ),
-    },
-];
-
-const data = [
-    {
-        key: '1',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '2',
-        name: 'Jim Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        tags: ['loser'],
-    },
-    {
-        key: '3',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sydney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-    {
-        key: '4',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sydney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-    {
-        key: '5',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sydney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-    {
-        key: '6',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sydney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-    {
-        key: '7',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sydney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-    {
-        key: '8',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sydney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-    {
-        key: '9',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sydney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-    {
-        key: '10',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sydney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-    {
-        key: '11',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sydney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-];
 export default function FosteringCp() {
+    const router = useRouter();
+    const [data, setData] = useState([]);
+
+    const columns = [
+        {
+            title: '用户名',
+            dataIndex: 'username',
+            key: 'username',
+        },
+        {
+            title: '宠物名',
+            dataIndex: 'petname',
+            key: 'petname',
+        },
+        {
+            title: '宠物类别',
+            key: 'pettype',
+            dataIndex: 'pettype',
+        },
+        {
+            title: '宠物照片',
+            key: 'petphoto',
+            dataIndex: 'petphoto',
+            render: (_, record) => (
+                <button>{record.petphoto}</button>
+            )
+        },
+        {
+            title: '操作',
+            key: 'isnew',
+            dataIndex: 'isnew',
+            width: 100,
+            render: (_, record) => (
+                <Popconfirm title='确认同意寄养?' okText='确认' cancelText='取消' onConfirm={() => {handleFoster(record.username, record.petname)}}>
+                    <Button>同意寄养</Button>
+                </Popconfirm>
+            ),
+        },
+    ];
+
+    function handleFoster(username, petname) {
+        const searchData = {
+            username,
+            petname
+        };
+
+        axios.post('http://localhost:3001/foster/confirmFostering', searchData).then(() => {
+            message.success('预约已受理,即将前往寄养管理查看。');
+            setTimeout(() => {
+                router.push('/admin/petfoster/petlist');
+            },500);
+        })
+    }
+
+    useEffect(() => {
+        axios.get('http://localhost:3001/foster/getFostering').then((response) => {
+            setData(response.data.data);
+        })
+    }, [])
 
     return (
         <div>
