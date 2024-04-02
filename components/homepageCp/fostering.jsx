@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import styles from './fostering.module.scss';
@@ -13,6 +13,8 @@ export default function Fostering() {
     const [form] = Form.useForm();
     const [isModalShow, setIsModalShow] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
+    const [fosterPetNum, setFosterPetNum] = useState(0);
+    const [petNum, setPetNum] = useState(0);
 
     const showModal = () => {
         setIsModalShow(true);
@@ -43,12 +45,22 @@ export default function Fostering() {
                     setIsModalShow(false);
                 },500);
             })
-
         }
         catch(err) {
             console.log('发送寄养申请出错:', err);
         }
     }
+
+    useEffect(() => {
+        axios.get('http://localhost:3001/foster/getFosterList').then(response => {
+            setFosterPetNum(response.data.data.length);
+        });
+
+        axios.get('http://localhost:3001/foster/getAllFosterList').then(response => {
+            setPetNum(response.data.data.length);
+        });
+        
+    },[]);
 
     return (
         <div className={styles['fostering']}>
@@ -56,10 +68,10 @@ export default function Fostering() {
             <div className={styles['statistic']}>
                 <Row gutter={16}>
                     <Col span={12}>
-                        <Statistic title="当前正在寄养的宠物" value={11} formatter={formatter} />
+                        <Statistic title="当前正在寄养的宠物" value={fosterPetNum} formatter={formatter} />
                     </Col>
                     <Col span={12}>
-                        <Statistic title="当前参与寄养的用户" value={1} precision={2} formatter={formatter} />
+                        <Statistic title="已经寄养过的宠物" value={petNum} precision={2} formatter={formatter} />
                     </Col>
                 </Row>
             </div>

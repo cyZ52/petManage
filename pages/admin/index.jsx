@@ -2,7 +2,10 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import axios from 'axios';
 
+import DemoPie from '@/components/adminpageCp/stats';
+
 import style from '@/styles/Layout.module.scss';
+import styles from '@/styles/Admin.module.scss';
 
 import { Button, Layout, Menu, Tooltip, message } from 'antd';
 import {
@@ -13,7 +16,9 @@ import {
     HomeOutlined,
     GithubOutlined,
     CarryOutOutlined,
-    ShoppingCartOutlined
+    ShoppingCartOutlined,
+    ReconciliationOutlined,
+    MessageOutlined
 } from '@ant-design/icons';
 
 const { Content, Sider } = Layout;
@@ -54,6 +59,12 @@ export default function Home() {
     function goProduct() {
         router.push('/admin/product');
     }
+    function goOrder() {
+        router.push('/admin/order');
+    }
+    function goDiscuss() {
+        router.push('/admin/discuss');
+    }
     function logout(){
         message.success('退出登录成功!');
         sessionStorage.clear();
@@ -71,6 +82,8 @@ export default function Home() {
         ),
         getItem('寄养预约管理', '6', <CarryOutOutlined />, undefined, goFostering),
         getItem('宠物产品', '7', <ShoppingCartOutlined />, undefined, goProduct),
+        getItem('订单处理', '8', <ReconciliationOutlined />, undefined, goOrder),
+        getItem('留言回复', '9', <MessageOutlined />, undefined, goDiscuss),
     ];
 
     return (
@@ -95,7 +108,7 @@ export default function Home() {
                 <Layout>
                     <Content style={{ margin: '0 16px', }}>
                         <div>
-                            统计图表
+                            <DemoPie></DemoPie>
                         </div>
                     </Content>
                 </Layout>

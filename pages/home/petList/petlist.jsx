@@ -9,7 +9,9 @@ import {
     HomeOutlined,
     GithubOutlined,
     CarryOutOutlined,
-    ShoppingCartOutlined
+    ShoppingCartOutlined,
+    ShoppingOutlined,
+    MessageOutlined
 } from '@ant-design/icons';
 
 const { Content, Sider } = Layout;
@@ -55,23 +57,26 @@ export default function Home() {
     function goProduct() {
         router.push('/home/product');
     }
+    function goMyOrder() {
+        router.push('/home/myorder');
+    }
+    function goDiscuss() {
+        router.push('/home/discuss');
+    }
 
     const items = [
         getItem('首页', '1', <HomeOutlined />, undefined, goHome),
         getItem('个人中心', '2', <UserOutlined />, undefined, goPerson),
         getItem('寄养信息', 'sub1', <GithubOutlined />,
-            [
-                getItem('寄养列表', '3', undefined, undefined, goList),
-                getItem('健康状态', '4', undefined, undefined, goHealthy)
-            ],
+            [getItem('寄养列表', '3', undefined, undefined, goList),
+            getItem('健康状态', '4', undefined, undefined, goHealthy)],
         ),
-        getItem('寄养预约', 'sub2', <CarryOutOutlined />,
-            [
-                getItem('寄养宠物', '5', undefined, undefined, goFostering),
-                getItem('我的宠物', '6', undefined, undefined, goMyPet)
-            ]
-        ),
-        getItem('宠物产品', '7', <ShoppingCartOutlined />, undefined, goProduct)
+        getItem('寄养预约', 'sub2', <CarryOutOutlined />, 
+        [getItem('寄养宠物', '5', undefined, undefined, goFostering), 
+        getItem('我的宠物', '6', undefined, undefined, goMyPet)]),
+        getItem('宠物产品', '7', <ShoppingCartOutlined />, undefined, goProduct),
+        getItem('我的订单', '8', <ShoppingOutlined />, undefined, goMyOrder),
+        getItem('留言板', '9', <MessageOutlined />, undefined, goDiscuss),
     ];
 
     return (

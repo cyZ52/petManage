@@ -1,10 +1,5 @@
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-
-import style from '@/styles/Layout.module.scss';
-import Fostering from '@/components/homepageCp/fostering'
-
-
+import { useRouter } from 'next/router';
 import { Button, Layout, Menu, Tooltip } from 'antd';
 import {
     NotificationOutlined,
@@ -18,10 +13,18 @@ import {
     ShoppingOutlined,
     MessageOutlined
 } from '@ant-design/icons';
+import style from '@/styles/Layout.module.scss';
+import ProductFront from '@/components/homepageCp/product';
 
 const { Content, Sider } = Layout;
 
-function getItem(label, key, icon, children, onClick) {
+function getItem(
+    label,
+    key,
+    icon,
+    children,
+    onClick
+) {
     return {
         key,
         icon,
@@ -38,27 +41,21 @@ export default function Home() {
     function goHome() {
         router.push('/home');
     }
-
     function goPerson() {
         router.push('/home/person');
     }
-
     function goList() {
         router.push('/home/petList/petlist');
     }
-
     function goHealthy() {
         router.push('/home/petList/pethealthy');
     }
-
     function goFostering() {
         router.push('/home/petfoster/fostering');
     }
-
     function goMyPet() {
         router.push('/home/petfoster/mypet');
     }
-
     function goProduct() {
         router.push('/home/product');
     }
@@ -98,16 +95,16 @@ export default function Home() {
             <Layout style={{ minHeight: '100vh' }}>
                 <Sider theme="dark" collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
                     <div className="demo-logo-vertical" />
-                    <Menu theme="dark" defaultSelectedKeys={['5']} defaultOpenKeys={['sub2']} mode="inline" items={items} />
+                    <Menu theme="dark" defaultSelectedKeys={['9']} mode="inline" items={items} />
                 </Sider>
                 <Layout>
-                    <Content style={{ margin: '0 16px' }}>
+                    <Content style={{ margin: '0 16px', }}>
                         <div>
-                            <Fostering />
+                            <ProductFront />
                         </div>
                     </Content>
                 </Layout>
             </Layout>
         </>
     );
-}
+};

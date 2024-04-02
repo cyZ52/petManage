@@ -12,7 +12,9 @@ import {
     HomeOutlined,
     GithubOutlined,
     CarryOutOutlined,
-    ShoppingCartOutlined
+    ShoppingCartOutlined,
+    ReconciliationOutlined,
+    MessageOutlined
 } from '@ant-design/icons';
 
 const { Content, Sider } = Layout;
@@ -28,33 +30,42 @@ function getItem(label, key, icon, children, onClick) {
 }
 
 
-export default function Home() {
+export default function Forstering() {
     const [collapsed, setCollapsed] = useState(false);
-    const router = useRouter()
+    const router = useRouter();
 
     function goHome() {
-        router.push('/admin')
+        router.push('/admin');
     }
     function goNotifi() {
-        router.push('/admin/notifications')
+        router.push('/admin/notifications');
     }
     function goList() {
-        router.push('/admin/petfoster/petlist')
+        router.push('/admin/petfoster/petlist');
     }
     function goAccount(){
-        router.push('/admin/account')
+        router.push('/admin/account');
     }
     function goHealthy() {
-        router.push('/admin/petfoster/pethealthy')
+        router.push('/admin/petfoster/pethealthy');
     }
     function goFostering() {
-        router.push('/admin/petfoster/fostering')
+        router.push('/admin/petfoster/fostering');
     }
     function goProduct() {
-        router.push('/admin/product')
+        router.push('/admin/product');
+    }
+    function goOrder() {
+        router.push('/admin/order');
+    }
+    function goDiscuss() {
+        router.push('/admin/discuss');
     }
     function logout(){
-        router.push('/login')
+        message.success('退出登录成功!');
+        sessionStorage.clear();
+        axios.get('http://localhost:3001/auth/logout');
+        router.push('/login');
     }
 
     const items = [
@@ -67,6 +78,8 @@ export default function Home() {
         ),
         getItem('寄养预约管理', '6', <CarryOutOutlined />, undefined, goFostering),
         getItem('宠物产品', '7', <ShoppingCartOutlined />, undefined, goProduct),
+        getItem('订单处理', '8', <ReconciliationOutlined />, undefined, goOrder),
+        getItem('留言回复', '9', <MessageOutlined />, undefined, goDiscuss),
     ];
 
     return (

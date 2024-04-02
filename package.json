@@ -10,6 +10,7 @@
       "lint": "next lint"
    },
    "dependencies": {
+      "@ant-design/charts": "^2.0.3",
       "@ant-design/icons": "^5.2.6",
       "@babel/preset-react": "^7.24.1",
       "@reduxjs/toolkit": "^2.2.1",

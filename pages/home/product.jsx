@@ -2,11 +2,16 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Button, Layout, Menu, Tooltip } from 'antd';
 import {
+    NotificationOutlined,
+    LogoutOutlined,
+    PieChartOutlined,
     UserOutlined,
     HomeOutlined,
     GithubOutlined,
     CarryOutOutlined,
-    ShoppingCartOutlined
+    ShoppingCartOutlined,
+    ShoppingOutlined,
+    MessageOutlined
 } from '@ant-design/icons';
 import style from '@/styles/Layout.module.scss';
 import ProductFront from '@/components/homepageCp/product';
@@ -54,6 +59,12 @@ export default function Home() {
     function goProduct() {
         router.push('/home/product');
     }
+    function goMyOrder() {
+        router.push('/home/myorder');
+    }
+    function goDiscuss() {
+        router.push('/home/discuss');
+    }
 
     const items = [
         getItem('首页', '1', <HomeOutlined />, undefined, goHome),
@@ -66,8 +77,9 @@ export default function Home() {
         [getItem('寄养宠物', '5', undefined, undefined, goFostering), 
         getItem('我的宠物', '6', undefined, undefined, goMyPet)]),
         getItem('宠物产品', '7', <ShoppingCartOutlined />, undefined, goProduct),
+        getItem('我的订单', '8', <ShoppingOutlined />, undefined, goMyOrder),
+        getItem('留言板', '9', <MessageOutlined />, undefined, goDiscuss),
     ];
-
     return (
         <>
             <div className={style['layout-header']}>

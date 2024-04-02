@@ -1,9 +1,13 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import style from '@/styles/Layout.module.scss'
-import PetHealthyCp from '@/components/adminpageCp/pethealthy'
+import axios from 'axios';
 
-import { Button, Layout, Menu, Tooltip } from 'antd';
+import ProductCp from '@/components/adminpageCp/product';
+
+import style from '@/styles/Layout.module.scss';
+import styles from '@/styles/Admin.module.scss';
+
+import { Button, Layout, Menu, Tooltip, message } from 'antd';
 import {
     NotificationOutlined,
     LogoutOutlined,
@@ -30,7 +34,7 @@ function getItem(label, key, icon, children, onClick) {
 }
 
 
-export default function PetHealthy() {
+export default function Home() {
     const [collapsed, setCollapsed] = useState(false);
     const router = useRouter();
 
@@ -43,7 +47,7 @@ export default function PetHealthy() {
     function goList() {
         router.push('/admin/petfoster/petlist');
     }
-    function goAccount(){
+    function goAccount() {
         router.push('/admin/account');
     }
     function goHealthy() {
@@ -61,7 +65,7 @@ export default function PetHealthy() {
     function goDiscuss() {
         router.push('/admin/discuss');
     }
-    function logout(){
+    function logout() {
         message.success('退出登录成功!');
         sessionStorage.clear();
         axios.get('http://localhost:3001/auth/logout');
@@ -99,12 +103,12 @@ export default function PetHealthy() {
             <Layout style={{ minHeight: '100vh' }}>
                 <Sider theme="dark" collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
                     <div className="demo-logo-vertical" />
-                    <Menu theme="dark" defaultSelectedKeys={['5']} defaultOpenKeys={['sub1']} mode="inline" items={items} />
+                    <Menu theme="dark" defaultSelectedKeys={['9']} mode="inline" items={items} />
                 </Sider>
                 <Layout>
                     <Content style={{ margin: '0 16px', }}>
                         <div>
-                            <PetHealthyCp/>
+                            <ProductCp />
                         </div>
                     </Content>
                 </Layout>
