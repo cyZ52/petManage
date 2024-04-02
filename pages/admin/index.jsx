@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import DemoPie from '@/components/adminpageCp/stats';
+// import DemoPie from '@/components/adminpageCp/stats';
 
 import style from '@/styles/Layout.module.scss';
 import styles from '@/styles/Admin.module.scss';
@@ -108,7 +108,7 @@ export default function Home() {
                 <Layout>
                     <Content style={{ margin: '0 16px', }}>
                         <div>
-                            <DemoPie></DemoPie>
+                            1
                         </div>
                     </Content>
                 </Layout>
