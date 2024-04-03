@@ -26,7 +26,7 @@ function getItem(label, key, icon, children, onClick) {
     };
 }
 
-export default function Home() {
+export default function PetList() {
     const [collapsed, setCollapsed] = useState(false);
     const router = useRouter();
 

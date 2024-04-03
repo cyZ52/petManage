@@ -34,7 +34,7 @@ function getItem(
     };
 }
 
-export default function Home() {
+export default function Discuss() {
     const [collapsed, setCollapsed] = useState(false);
     const router = useRouter();
 

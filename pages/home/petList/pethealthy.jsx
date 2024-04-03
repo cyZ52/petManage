@@ -31,7 +31,7 @@ function getItem(
     };
 }
 
-export default function Home() {
+export default function PetHealthy() {
     const [collapsed, setCollapsed] = useState(false);
     const router = useRouter();
 

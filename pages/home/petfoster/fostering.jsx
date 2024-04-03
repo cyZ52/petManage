@@ -31,7 +31,7 @@ function getItem(label, key, icon, children, onClick) {
     };
 }
 
-export default function Home() {
+export default function Fostering() {
     const [collapsed, setCollapsed] = useState(false);
     const router = useRouter();
 

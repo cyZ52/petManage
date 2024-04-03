@@ -1,7 +1,9 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import style from '@/styles/Layout.module.scss'
+import style from '@/styles/Layout.module.scss';
+import styles from '@/styles/Admin.module.scss';
 import ProductCp from '@/components/adminpageCp/product';
+import SetProductModal from '@/components/adminpageCp/setProductModal';
 
 import { Button, Layout, Menu, Tooltip } from 'antd';
 import {
@@ -43,7 +45,7 @@ export default function Product() {
     function goList() {
         router.push('/admin/petfoster/petlist');
     }
-    function goAccount(){
+    function goAccount() {
         router.push('/admin/account');
     }
     function goHealthy() {
@@ -61,7 +63,7 @@ export default function Product() {
     function goDiscuss() {
         router.push('/admin/discuss');
     }
-    function logout(){
+    function logout() {
         message.success('退出登录成功!');
         sessionStorage.clear();
         axios.get('http://localhost:3001/auth/logout');
@@ -103,7 +105,10 @@ export default function Product() {
                 </Sider>
                 <Layout>
                     <Content style={{ margin: '0 16px', }}>
-                        <div>
+                        <div className={styles['admin-product-body']}>
+                            <div className={styles['admin-product-setProduct']}>
+                            <SetProductModal />
+                            </div>
                             <ProductCp />
                         </div>
                     </Content>
