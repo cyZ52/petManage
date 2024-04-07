@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
 import style from '@/styles/Layout.module.scss';
-import Fostering from '@/components/homepageCp/fostering'
+import FosteringCp from '@/components/homepageCp/fostering'
 
 
 import { Button, Layout, Menu, Tooltip } from 'antd';
@@ -103,7 +103,7 @@ export default function Fostering() {
                 <Layout>
                     <Content style={{ margin: '0 16px' }}>
                         <div>
-                            <Fostering />
+                            <FosteringCp />
                         </div>
                     </Content>
                 </Layout>

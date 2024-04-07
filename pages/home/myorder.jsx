@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+
+import style from '@/styles/Layout.module.scss';
+import MyOrderCp from '@/components/homepageCp/myorder';
+
 import { Button, Layout, Menu, Tooltip } from 'antd';
 import {
     NotificationOutlined,
@@ -13,8 +17,7 @@ import {
     ShoppingOutlined,
     MessageOutlined
 } from '@ant-design/icons';
-import style from '@/styles/Layout.module.scss';
-import ProductFront from '@/components/homepageCp/product';
+
 
 const { Content, Sider } = Layout;
 
@@ -100,7 +103,7 @@ export default function MyOrder() {
                 <Layout>
                     <Content style={{ margin: '0 16px', }}>
                         <div>
-                            <ProductFront />
+                            <MyOrderCp />
                         </div>
                     </Content>
                 </Layout>

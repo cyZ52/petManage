@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import ProductCp from '@/components/adminpageCp/product';
+import OrderCp from '../../components/adminpageCp/order';
 
 import style from '@/styles/Layout.module.scss';
 import styles from '@/styles/Admin.module.scss';
@@ -108,7 +108,7 @@ export default function Home() {
                 <Layout>
                     <Content style={{ margin: '0 16px', }}>
                         <div>
-                            <ProductCp />
+                            <OrderCp />
                         </div>
                     </Content>
                 </Layout>
