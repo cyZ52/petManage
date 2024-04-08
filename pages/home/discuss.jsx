@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Button, Layout, Menu, Tooltip } from 'antd';
 import {
-    NotificationOutlined,
-    LogoutOutlined,
-    PieChartOutlined,
     UserOutlined,
     HomeOutlined,
     GithubOutlined,
@@ -14,7 +11,7 @@ import {
     MessageOutlined
 } from '@ant-design/icons';
 import style from '@/styles/Layout.module.scss';
-import ProductFront from '@/components/homepageCp/product';
+import DiscussCP from '../../components/homepageCp/discuss';
 
 const { Content, Sider } = Layout;
 
@@ -100,7 +97,7 @@ export default function Discuss() {
                 <Layout>
                     <Content style={{ margin: '0 16px', }}>
                         <div>
-                            <ProductFront />
+                            <DiscussCP />
                         </div>
                     </Content>
                 </Layout>
