@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { Button,  Space, Table, Tag } from 'antd';
+import { Avatar, Image, Table } from 'antd';
 
 export default function PetListFront() {
     const [data, setData] = useState([]);
@@ -16,13 +16,13 @@ export default function PetListFront() {
             title: '宠物照片',
             dataIndex: 'petphoto',
             key: 'petphoto',
-            render: (petphoto) => <button>{petphoto}</button>
+            render: (petphoto) => <Image width={100} height={100} src={petphoto}/>
         },
         {
             title: '所属用户头像',
             dataIndex: 'avater',
             key: 'avater',
-            render: (avater) => <button>{avater}</button>
+            render: (avater) => <Avatar size={64} src={avater}/>
         },
         {
             title: '所属用户名',

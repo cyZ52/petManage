@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { Button, Popconfirm, Radio, Space, Table, Tag } from 'antd';
+import { Image, Table, Tag } from 'antd';
 
 const columns = [
     {
@@ -19,7 +19,7 @@ const columns = [
         dataIndex: 'petphoto',
         key: 'petphoto',
         render: (petphoto) => (
-            <button>{petphoto}</button>
+            <Image width={100} height={100} src={petphoto}/>
         )
     },
     {

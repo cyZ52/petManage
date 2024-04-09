@@ -3,9 +3,10 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import UploadImgCP from './uploadImg';
 import style from './personpage.module.scss';
 
-import { Button, Descriptions, Form, Input, InputNumber, Modal, Radio, Space, message } from 'antd';
+import { Button, Descriptions, Form, Input, InputNumber, Modal, Radio, Space, message, Avatar } from 'antd';
 
 
 
@@ -14,10 +15,9 @@ export default function PersonPage() {
     const router = useRouter();
     const username = useSelector(state => state.user.username);
 
-    // const personInfo = sessionStorage.getItem('personInfo');
-    // const { avater, age, location, sex, like, personSlogan } = JSON.parse(personInfo);
     const personInfo = typeof window !== 'undefined' ? sessionStorage.getItem('personInfo') : null;
     const { avater, age, location, sex, like, personSlogan } = personInfo ? JSON.parse(personInfo) : {};
+    const [avaterSrc, setAvaterSrc] = useState(avater);
 
     const [isModalShow, setIsModalShow] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
@@ -41,13 +41,26 @@ export default function PersonPage() {
         setIsPasswordModalShow(false);
     };
 
+
+    function uploadAvater(url) {
+        const updateData = {
+            username: username,
+            avater: url
+        };
+
+        axios.post('http://localhost:3001/account/changeAvater', updateData)
+    }
+
     async function handleOk() {
         const form_data = await form.validateFields();
 
         console.log('修改后的用户信息为:', form_data);
 
+        console.log(avater);
+
         const updateData = {
             username: username,
+            avater: avaterSrc,
             ...form_data
         }
 
@@ -99,7 +112,7 @@ export default function PersonPage() {
             key: '2',
             label: '头像',
             children: (
-                <Button>{avater}</Button>
+                <Avatar size={64} src={avaterSrc} />
             ),
         },
         {
@@ -166,7 +179,7 @@ export default function PersonPage() {
                                         label="头像"
                                         name="avater"
                                     >
-                                        <Input placeholder='后续完善为文件上传' />
+                                        <UploadImgCP fn={uploadAvater}/>
                                     </Form.Item>
 
                                     <Form.Item

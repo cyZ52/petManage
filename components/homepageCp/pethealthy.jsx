@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Radio, Space, Table, Tag } from 'antd';
+import { Image, Table, Tag } from 'antd';
 import axios from 'axios';
 
 
@@ -16,7 +16,7 @@ export default function PetHealthyFront() {
             title: '宠物照片',
             dataIndex: 'petphoto',
             key: 'petphoto',
-            render: (avater) => <button>{avater}</button>
+            render: (petphoto) => <Image width={100} height={100} src={petphoto}/>
         },
         {
             title: '所属用户名',

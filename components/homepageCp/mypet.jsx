@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { Button, Popconfirm, Table, Tag, message } from 'antd';
+import { Button, Popconfirm, Table, Tag, message, Image } from 'antd';
 
 
 
@@ -19,7 +19,7 @@ export default function MyPet() {
             title: '宠物照片',
             dataIndex: 'petphoto',
             key: 'petphoto',
-            render: (petphoto) => <button>{petphoto}</button>
+            render: (petphoto) => <Image width={100} height={100} src={petphoto}/>
         },
         {
             title: '健康状态',

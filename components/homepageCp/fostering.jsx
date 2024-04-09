@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import styles from './fostering.module.scss';
+import UploadImgCP from '../uploadImg';
 
 import CountUp from 'react-countup';
-import { Button, Card, Col, Form, Input, Modal, Radio, Row, Statistic, message } from 'antd';
+import { Button, Card, Col, Form, Input, Modal, Radio, Row, Statistic, message, Image } from 'antd';
 
 const formatter = (value) => <CountUp end={value} separator="," />;
 const { Meta } = Card;
@@ -15,6 +16,7 @@ export default function Fostering() {
     const [confirmLoading, setConfirmLoading] = useState(false);
     const [fosterPetNum, setFosterPetNum] = useState(0);
     const [petNum, setPetNum] = useState(0);
+    const [petPhoto, setPetPhoto] = useState('')
 
     const showModal = () => {
         setIsModalShow(true);
@@ -24,17 +26,25 @@ export default function Fostering() {
         setIsModalShow(false);
     };
 
+
+    function uploadImg(url) {
+        setPetPhoto(url);
+    }
+
     async function handleOk() {
         try {
             const form_data = await form.validateFields();
 
             const userInfo = sessionStorage.getItem('personInfo');
             const {username, avater} = JSON.parse(userInfo);
+            const {petname, pettype} = form_data;
 
             const updateData = {
                 username: username,
                 avater: avater,
-                ...form_data
+                petphoto: petPhoto,
+                petname: petname,
+                pettype: pettype
             };
 
             axios.post('http://localhost:3001/foster/applyFoster',updateData).then(() => {
@@ -146,7 +156,7 @@ export default function Fostering() {
                         label="宠物照片"
                         name="petphoto"
                     >
-                        <Input placeholder='后续完善为文件上传' defaultValue={'abc'}/>
+                        <UploadImgCP fn={uploadImg}/>
                     </Form.Item>
 
                     <Form.Item

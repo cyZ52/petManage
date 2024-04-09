@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 // import DemoPie from '@/components/adminpageCp/stats';
+import TextCP from '@/components/adminpageCp/stats';
 
 import style from '@/styles/Layout.module.scss';
 import styles from '@/styles/Admin.module.scss';
@@ -91,7 +92,8 @@ export default function Home() {
 
             <div className={style['layout-header']}>
                 <Tooltip title="返回主页">
-                    <Button shape="circle" icon={<HomeOutlined />} onClick={goHome} />
+                    <Button shape="circle" icon={<HomeOutlined />} onClick={goHome} >
+                        </Button>
                 </Tooltip>
                 <span>Shame7宠物管理系统后台</span>
                 <Tooltip title="退出登录">
@@ -108,7 +110,7 @@ export default function Home() {
                 <Layout>
                     <Content style={{ margin: '0 16px', }}>
                         <div>
-                            1
+                            <TextCP />
                         </div>
                     </Content>
                 </Layout>

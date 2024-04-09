@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 
-import { Button, Table, Tooltip, Popconfirm, message } from 'antd';
+import { Button, Table, Tooltip, Popconfirm, message, Avatar } from 'antd';
 
 
 export default function AccountCp() {
@@ -50,7 +50,7 @@ export default function AccountCp() {
       title: '头像',
       dataIndex: 'avater',   // 对应属性
       key: 'avater',
-      render: (text) => <Button>{text}</Button>,
+      render: (avater) => <Avatar size={64} src={avater}/>,
       width: 120,
     },
     {

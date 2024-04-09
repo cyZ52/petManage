@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 
-import { Button, Form, Input, Modal, Radio, Space, Table, Tag, message } from 'antd';
+import { Button, Form, Input, Modal, Image, Avatar, Table, Tag, message } from 'antd';
 
 
 
@@ -58,6 +58,22 @@ export default function PetHealthyCp() {
             title: '所属用户',
             dataIndex: 'username',
             key: 'username',
+        },
+        {
+            title: '用户头像',
+            dataIndex: 'avater',
+            key: 'avater',
+            render: (avater) => (
+                <Avatar size={64} src={avater}/>
+            )
+        },
+        {
+            title: '宠物',
+            dataIndex: 'petphoto',
+            key: 'petphoto',
+            render: (petphoto) => (
+                <Image width={100} height={100} src={petphoto} />
+            )
         },
         {
             title: '健康状态',

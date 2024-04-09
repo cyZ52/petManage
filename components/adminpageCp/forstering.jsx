@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 
 
-import { Button, Popconfirm, Radio, Space, Table, Tag, message } from 'antd';
+import { Button, Popconfirm, Table, message, Image } from 'antd';
 
 
 export default function FosteringCp() {
@@ -31,7 +31,7 @@ export default function FosteringCp() {
             key: 'petphoto',
             dataIndex: 'petphoto',
             render: (_, record) => (
-                <button>{record.petphoto}</button>
+                <Image width={100} height={100} src={record.petphoto} />
             )
         },
         {

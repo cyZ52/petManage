@@ -7,7 +7,7 @@ import { setUsername } from '@/redux/slice/user';
 import style from '@/styles/Layout.module.scss';
 import HomePage from '@/components/homepage';
 
-import { Button, Layout, Menu, Tooltip, message } from 'antd';
+import { Button, Layout, Menu, Tooltip, message, Avatar } from 'antd';
 import {
     NotificationOutlined,
     LogoutOutlined,
