@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Table, Popconfirm, message, Space } from 'antd';
+import { Button, Table, Popconfirm, message, Space, Image, Tag } from 'antd';
 import axios from 'axios';
 
 
@@ -53,10 +53,16 @@ export default function MyOrder() {
         {
             title: '商品照片',
             dataIndex: 'photo',
+            render: (photo) => (
+                <Image width={100} height={100} src={photo}/>
+            )
         },
         {
             title: '商品描述',
             dataIndex: 'detail',
+            render: (detail) => (
+                <Tag color='geekblue'>{detail}</Tag>
+            )
         },
         {
             title: '商品价格',

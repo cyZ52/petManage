@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Table, message, Space, Popconfirm } from 'antd';
+import { Button, Table, message, Space, Popconfirm, Tag } from 'antd';
 import axios from 'axios';
 
 export default function OrderCp() {
@@ -61,6 +61,9 @@ export default function OrderCp() {
       title: '商品描述',
       dataIndex: 'detail',
       width: '40%',
+      render: (detail) => (
+        <Tag color='geekblue'>{detail}</Tag>
+      )
     },
     {
       title: '操作',

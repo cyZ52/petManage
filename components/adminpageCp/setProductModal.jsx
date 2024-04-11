@@ -1,27 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+
 import { Button, Form, Input, InputNumber, Modal, Radio, message } from 'antd';
 
-
+import UploadImgCP from '../uploadImg';
 
 export default function SetProductModal() {
     const [form] = Form.useForm();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
+    const [photo, setPhoto] = useState('');
 
     const showModal = () => {
         setIsModalOpen(true);
     }
 
+    // useEffect(() => {
+    //     console.log('useEffect',photo);
+    // },[photo]);
+
+    function uploadImg(url) {
+        setPhoto(url);
+        console.log(url);
+        console.log(photo);
+    }
+
     async function handleOk() {
         // 此处发送post请求
         const form_data = await form.validateFields();
-
-        console.log('新发布的系统通知内容:', form_data);
+        
+        console.log('handleOk',photo);
 
         const postData = {
-            ...form_data
+            ...form_data,
+            photo: photo
         };
 
         const response = await axios.post('http://localhost:3001/product/setProduct', postData);
@@ -33,7 +46,7 @@ export default function SetProductModal() {
         setTimeout(() => {
             setIsModalOpen(false);
             setConfirmLoading(false);
-            window.location.reload();
+            // window.location.reload();
         }, 1500);
     }
 
@@ -45,7 +58,7 @@ export default function SetProductModal() {
             <Button type="primary" onClick={showModal}>
                 新增商品
             </Button>
-            <Modal title='发布新的系统通知' open={isModalOpen} confirmLoading={confirmLoading} okText='发布' onOk={handleOk} cancelText='取消' onCancel={handelCancel}>
+            <Modal title='上架新的商品' open={isModalOpen} confirmLoading={confirmLoading} okText='发布' onOk={handleOk} cancelText='取消' onCancel={handelCancel}>
                 <Form
                     name="nitify"
                     form={form}
@@ -78,14 +91,8 @@ export default function SetProductModal() {
                     <Form.Item
                         label="商品照片"
                         name="photo"
-                        rules={[
-                            {
-                                required: true,
-                                message: '请输入内容!',
-                            },
-                        ]}
                     >
-                        <Input />
+                        <UploadImgCP fn={uploadImg}/>
                     </Form.Item>
 
                     <Form.Item

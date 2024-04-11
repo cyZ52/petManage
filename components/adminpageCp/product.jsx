@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Table, message } from 'antd';
+import { Button, Table, message, Tag } from 'antd';
 import axios from 'axios';
+
+
+
 
 export default function ProductCp() {
   const [data, setData] = useState([]);
@@ -45,6 +48,9 @@ export default function ProductCp() {
       title: '商品描述',
       dataIndex: 'detail',
       width: '40%',
+      render: (detail) => (
+        <Tag color='geekblue'>{detail}</Tag>
+      )
     },
     {
       title: '操作',

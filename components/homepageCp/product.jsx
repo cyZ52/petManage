@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Table, Popconfirm, message } from 'antd';
+import { Button, Table, Popconfirm, message, Image, Tag } from 'antd';
 import axios from 'axios';
 
 
@@ -42,6 +42,9 @@ export default function ProductFront() {
         {
             title: '商品照片',
             dataIndex: 'photo',
+            render: (photo) => (
+                <Image width={100} height={100} src={photo}/>
+            )
         },
         {
             title: '商品价格',
@@ -50,6 +53,9 @@ export default function ProductFront() {
         {
             title: '商品描述',
             dataIndex: 'detail',
+            render: (detail) => (
+                <Tag color='geekblue'>{detail}</Tag>
+            )
         },
         {
             title: '购买',
